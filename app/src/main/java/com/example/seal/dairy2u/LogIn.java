@@ -114,16 +114,10 @@ public class LogIn extends AppCompatActivity {
 
 
     private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
-
-        // Write new user
-        //writeNewUser(user.getUid(), username, user.getEmail());
-
-        // Go to event page
-        //startActivity(new Intent(LogIn.this, Event_List.class));
-        Toast.makeText(LogIn.this, "You are logged in", Toast.LENGTH_SHORT).show();
-        //finish();
+        // --- Go to Product List page
+        startActivity(new Intent(LogIn.this, ItemList.class));
     }
+
 
     //Form validation for email and password
     private boolean validateForm() {
@@ -145,16 +139,7 @@ public class LogIn extends AppCompatActivity {
         } else {
             password_field.setError(null);
         }
-
         return valid;
-    }
-
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
     }
 
 }

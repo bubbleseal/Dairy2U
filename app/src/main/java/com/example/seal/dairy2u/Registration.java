@@ -70,7 +70,7 @@ public class Registration extends AppCompatActivity{
                 if (user != null) {
                     // User is signed in
                     Toast.makeText(Registration.this, R.string.signed_in, Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(registration.this, Event_List.class));
+                    //startActivity(new Intent(registration.this, .class));
                 }
             }
         };
@@ -133,7 +133,7 @@ public class Registration extends AppCompatActivity{
 
                     //--- Create new user into Database and go to events page
                     writeNewUser(name, newemail);
-                    //startActivity(new Intent(registration.this, Event_List.class));
+                    //startActivity(new Intent(registration.this, .class));
                 }
             }
         });
