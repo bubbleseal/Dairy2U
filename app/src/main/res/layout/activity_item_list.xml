@@ -21,6 +21,7 @@
             android:textColor="@color/white"
             android:textSize="40sp"
             android:gravity="top"
+            android:layout_marginBottom="50dp"
             android:id="@+id/title" />
 
         <ScrollView
@@ -46,6 +47,7 @@
         android:layout_marginTop="30dp"
         android:layout_height="50dp">
 
+        <!-- Add button -->
         <ImageButton
             android:id="@+id/b_addEvent"
             android:layout_width="wrap_content"
@@ -55,6 +57,7 @@
             android:clickable="true"
             android:layout_marginRight="120dp" />
 
+        <!-- Log Out button -->
         <ImageButton
             android:id="@+id/b_logout"
             android:layout_height="match_parent"
