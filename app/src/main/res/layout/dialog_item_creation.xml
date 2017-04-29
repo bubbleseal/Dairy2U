@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/brown1"
+    android:fitsSystemWindows="true">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <!-- Name Form -->
+        <EditText
+            android:id="@+id/item_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/form"
+            android:hint="Product Name"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:typeface="normal" />
+
+        <!-- Price Form -->
+        <EditText
+            android:id="@+id/item_price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/form"
+            android:hint="Price"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:typeface="normal" />
+
+
+        <!-- create event button -->
+        <Button
+            android:id="@+id/b_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:width="80dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="ADD PRODUCT"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+
+    </TableLayout>
+</ScrollView>
+

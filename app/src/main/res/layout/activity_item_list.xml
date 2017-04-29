@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/brown1"
+    android:fitsSystemWindows="true">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="PRODUCTS"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:gravity="top"
+            android:id="@+id/title" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ItemList"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+            </LinearLayout>
+        </ScrollView>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:id="@+id/b_addEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:layout_marginRight="120dp" />
+
+        <ImageButton
+            android:id="@+id/b_logout"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_logout"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:layout_width="50dp"
+            android:layout_marginLeft="120dp" />
+
+    </LinearLayout>
+</FrameLayout>

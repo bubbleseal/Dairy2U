@@ -6,4 +6,5 @@
     <string name="signed_out">User signed out</string>
     <string name="link_pwdforgotten">Forgotten Password?</string>
     <string name="link_register">Not a member?</string>
+    <string name="title_activity_product__list">Product_List</string>
 </resources>
