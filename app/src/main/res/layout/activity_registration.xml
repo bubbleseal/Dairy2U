@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/brown1"
+    android:fitsSystemWindows="true">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/logo"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_height="100dp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="50dp"
+            android:paddingBottom="20dp"
+            android:layout_height="350dp">
+
+            <!--  Name Form  -->
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/form"
+                android:drawablePadding="10dp"
+                android:hint="Name"
+                android:includeFontPadding="false"
+                android:inputType="textCapWords"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:typeface="normal" />
+
+            <!-- Email Form -->
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/form"
+                android:drawablePadding="10dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:typeface="normal"
+                android:layout_height="50dp" />
+
+
+            <!-- Password Form -->
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/form"
+                android:drawablePadding="10dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:typeface="normal" />
+
+            <Button
+                android:id="@+id/b_reg"
+                android:layout_height="wrap_content"
+                android:width="50dp"
+                android:background="@android:color/transparent"
+                android:text="REGISTER"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="50dp" />
+
+        </TableLayout>
+
+    </TableLayout>
+</ScrollView>

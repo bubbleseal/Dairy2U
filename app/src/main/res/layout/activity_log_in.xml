@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/brown1"
+    android:fitsSystemWindows="true">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/logo"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_height="100dp" />
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_height="350dp">
+
+            <!-- Email Form -->
+            <EditText
+                android:id="@+id/signin_email"
+                android:layout_width="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/form"
+                android:drawablePadding="10dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:typeface="normal"
+                android:layout_height="50dp" />
+
+
+            <!-- Password Form -->
+            <EditText
+                android:id="@+id/signin_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/form"
+                android:drawablePadding="10dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:typeface="normal" />
+
+            <!-- Reset password button -->
+            <Button
+                android:id="@+id/link_pwdforgot"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:textSize="12sp"
+                android:background="@android:color/transparent"
+                android:gravity="right"
+                android:text="@string/link_pwdforgotten"/>
+
+            <!-- Log in button -->
+            <Button
+                android:id="@+id/b_sign"
+                android:layout_height="wrap_content"
+                android:width="50dp"
+                android:background="@android:color/transparent"
+                android:text="LOG IN"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="50dp"/>
+
+            <!-- To register button -->
+            <Button
+                android:id="@+id/link_reg"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:background="@android:color/transparent"
+                android:letterSpacing="0.1"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/link_register"/>
+        </TableLayout>
+    </TableLayout>
+</ScrollView>

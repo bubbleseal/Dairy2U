@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "972049651015",
+    "firebase_url": "https://dairy2u-4302b.firebaseio.com",
+    "project_id": "dairy2u-4302b",
+    "storage_bucket": "dairy2u-4302b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972049651015:android:a2a5076af8b4f64a",
+        "android_client_info": {
+          "package_name": "com.example.seal.dairy2u"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972049651015-7vj659ubg934f949ittliqj0mqfr18c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIic8IAoFH08H0hQENjrKlGS-tzVgoafE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

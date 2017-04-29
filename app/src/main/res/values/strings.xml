@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Dairy2U</string>
+    <string name="reg_failed">Failed to register</string>
+    <string name="reg_success">Registration successful</string>
+    <string name="signed_in">User signed in</string>
+    <string name="signed_out">User signed out</string>
+    <string name="link_pwdforgotten">Forgotten Password?</string>
+    <string name="link_register">Not a member?</string>
+</resources>
