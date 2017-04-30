@@ -27,8 +27,7 @@
             android:paddingTop="50dp"
             android:background="@drawable/tabletop"
             android:shadowColor="#000000"
-            android:shadowRadius="5"
-            android:textColorLink="@color/common_google_signin_btn_text_dark_focused"/>
+            android:shadowRadius="5"/>
 
         <ScrollView
             android:layout_width="match_parent"
