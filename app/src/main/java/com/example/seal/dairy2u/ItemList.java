@@ -4,19 +4,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +38,6 @@ public class ItemList extends AppCompatActivity {
     private TextView mainTitle;
     private ImageButton b_addEvent, b_logout;
     private LinearLayout ll;
-    private int buttonID;
-    String LOG = "Spot Tag: ";
 
     private Typeface mainfont, textfont;
 
@@ -103,7 +102,6 @@ public class ItemList extends AppCompatActivity {
 
         // --- Keep copy of post listener so we can remove it when app stops ---
         mPostListener = postListener;
-
     }
 
 
@@ -117,23 +115,24 @@ public class ItemList extends AppCompatActivity {
             // --- Get individual value ---
             String name = (String)singleItem.get("name");
             String price = (String)singleItem.get("price");
+            String type = (String)singleItem.get("type");
 
             // --- Create event object, add to list ---
-            items.add(new Item(name,price));
+            items.add(new Item(name,price,type));
         }
 
         // --- For each event in list, create a row --
         for(Item item: items){
-            createItem(item.name, item.price);
+            createItem(item.name, item.price, item.type);
         }
     }
 
 
     //--- LIST ITEMS ---
-    public void createItem(String name, String price){
+    public void createItem(String name, String price, String type){
         LinearLayout container = new LinearLayout(this);
-        TextView newItem = new TextView(this);
-        TextView iPrice = new TextView(this);
+        TextView iName_field = new TextView(this);
+        TextView iPrice_field = new TextView(this);
 
         // --- Set linear layout attributes ---
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -147,17 +146,41 @@ public class ItemList extends AppCompatActivity {
         gd.setColor(0xFFffffff);
         container.setBackground(gd);
 
+
+        // --- Set item type icon ---
+        switch (type){
+            case "Butter":
+                container.addView(createIcons(R.drawable.ic_butter));
+                break;
+            case "Cheese":
+                container.addView(createIcons(R.drawable.ic_cheese));
+                break;
+            case "Cream":
+                container.addView(createIcons(R.drawable.ic_cream));
+                break;
+            case "Drinks":
+                container.addView(createIcons(R.drawable.ic_drink));
+                break;
+            case "Milk":
+                container.addView(createIcons(R.drawable.ic_milk));
+                break;
+            case "Yogurt":
+                container.addView(createIcons(R.drawable.ic_yogurt));
+                break;
+        }
+
         // --- Set item name attributes ---
-        newItem.setText(name);
-        newItem.setTextColor(Color.BLACK);
-        newItem.setTypeface(textfont);
-        newItem.setLayoutParams(new ActionBar.LayoutParams(
+        iName_field.setText(name);
+        iName_field.setTextColor(Color.BLACK);
+        iName_field.setTypeface(textfont);
+        iName_field.setLayoutParams(new ActionBar.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        newItem.setWidth(500);
-        newItem.setHeight(180);
-        newItem.setTextSize(18);
-        newItem.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-        newItem.setBackgroundColor(Color.TRANSPARENT);
+        iName_field.setWidth(500);
+        iName_field.setHeight(180);
+        iName_field.setTextSize(18);
+        iName_field.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+        iName_field.setBackgroundColor(Color.TRANSPARENT);
+
 
         // --- Format price to 2 decimal points for display
         DecimalFormat df = new DecimalFormat("#.00");
@@ -165,18 +188,18 @@ public class ItemList extends AppCompatActivity {
         price = df.format(fPrice);
 
         // --- Set item price attributes ---
-        iPrice.setText("RM" + price);
-        iPrice.setTextColor(Color.BLACK);
-        iPrice.setTypeface(textfont);
-        iPrice.setLayoutParams(new ActionBar.LayoutParams(
+        iPrice_field.setText("RM" + price);
+        iPrice_field.setTextColor(Color.BLACK);
+        iPrice_field.setTypeface(textfont);
+        iPrice_field.setLayoutParams(new ActionBar.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        iPrice.setWidth(500);
-        iPrice.setTextSize(18);
-        iPrice.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-        iPrice.setBackgroundColor(Color.TRANSPARENT);
+        iPrice_field.setWidth(500);
+        iPrice_field.setTextSize(18);
+        iPrice_field.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+        iPrice_field.setBackgroundColor(Color.TRANSPARENT);
 
-        container.addView(newItem);
-        container.addView(iPrice);
+        container.addView(iName_field);
+        container.addView(iPrice_field);
         ll.addView(container);
     }
 
@@ -191,6 +214,10 @@ public class ItemList extends AppCompatActivity {
                 View mView = getLayoutInflater().inflate(R.layout.dialog_item_creation, null);
                 final TextView iName = (TextView) mView.findViewById(R.id.item_name);
                 final TextView iPrice = (TextView) mView.findViewById(R.id.item_price);
+                final Spinner iType = (Spinner) mView.findViewById(R.id.item_type);
+                ArrayAdapter adapter = ArrayAdapter.createFromResource(ItemList.this, R.array.item_arrays, R.layout.spinner_item);
+                iType.setAdapter(adapter);
+
                 Button addButton = (Button) mView.findViewById(R.id.b_create);
 
                 mBuilder.setView(mView);
@@ -203,9 +230,11 @@ public class ItemList extends AppCompatActivity {
                         // --- Add new item to database and preview list ---
                         String newName = iName.getText().toString();
                         String newPrice = iPrice.getText().toString();
-                        toDatabase(newName, newPrice);
+                        String newType = String.valueOf(iType.getSelectedItem());
+
+                        toDatabase(newName, newPrice, newType);
                         dialog.dismiss();
-                        createItem(newName, newPrice);
+                        createItem(newName, newPrice, newType);
                     }
                 });
 
@@ -218,33 +247,27 @@ public class ItemList extends AppCompatActivity {
     }
 
 
-    //--- Button listener for each Event ---
-    /*View.OnClickListener buttonClicked(final Button button)  {
-        return new View.OnClickListener() {
-            public void onClick(View v) {
-                String criteria = button.getText().toString().trim();
-                Item passEvent = new Item();
-                for(Item event: events){
-                    if(criteria == event.title){
-                        passEvent = event;
-                    }
-                }
+    //--- Create guest feedback icons
+    public ImageView createIcons(int ic_url){
+        ImageView icon = new ImageView(this);
+        icon.setImageResource(ic_url);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        params.height = 180;
+        params.width = 100;
+        icon.setPadding(0,0,20,0);
+        icon.setLayoutParams(params);
+        return icon;
+    }
 
-                //--- Pass event object to next activity
-                Intent intent = new Intent(ItemList.this, Event_Page.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("eventObj",passEvent);
-                intent.putExtras(bundle);
-                startActivity(intent);
-
-            }
-        };
-    }*/
 
 
     // --- WRITE NEW ITEM TO DATABASE ---
-    private void toDatabase(String name, String price) {
-        Item item = new Item(name, price);
+    private void toDatabase(String name, String price, String type) {
+        Item item = new Item(name, price, type);
         mDatabase.child("items").child(name).setValue(item);
     }
 
