@@ -3,6 +3,8 @@ package com.example.seal.dairy2u;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +40,7 @@ public class ItemList extends AppCompatActivity {
     private int buttonID;
     String LOG = "Spot Tag: ";
 
-    private Typeface mainfont;
+    private Typeface mainfont, textfont;
 
     private FirebaseAuth mAuth;
     FirebaseUser user;
@@ -51,20 +54,21 @@ public class ItemList extends AppCompatActivity {
         setContentView(R.layout.activity_item_list);
         items.clear();
 
-        //Custom typefaces
+        // --- Custom typefaces ---
         mainfont = Typeface.createFromAsset(getAssets(), "fonts/Neon.ttf");
+        textfont = Typeface.createFromAsset(getAssets(), "fonts/Comfortaa-Regular.ttf");
 
-        //Set title font
+        // --- Set title font ---
         mainTitle = (TextView) findViewById(R.id.title);
         mainTitle.setTypeface(mainfont);
 
-        //Image button
+        // --- Image button ---
         b_logout = (ImageButton) findViewById(R.id.b_logout);
         b_addEvent = (ImageButton) findViewById(R.id.b_addEvent);
         b_addEvent.setOnClickListener(new ItemList.ButtonHandler());
         b_logout.setOnClickListener(new ItemList.ButtonHandler());
 
-        // Initialize Database
+        // --- Initialize Database ---
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("farmers").child(user.getUid());
 
@@ -73,29 +77,20 @@ public class ItemList extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
-        // Add value event listener to the post
+        // --- Add single value event listener to the post ---
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get all events and have it sorted
+                // --- Get all items and add to Map ---
                 if (dataSnapshot.hasChild("items")) {
                     getAllItems((Map<String, Object>) dataSnapshot.child("items").getValue());
+                    //mDatabase.removeEventListener(this);
                 } else {
                     Toast.makeText(ItemList.this, "No items", Toast.LENGTH_SHORT).show();
-                    /*noItems.setText("You have no items in your list.");
-
-                    noItems.setLayoutParams(new ActionBar.LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    noItems.setWidth(500);
-                    noItems.setTextSize(20);
-                    noItems.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                    noItems.setBackgroundColor(Color.TRANSPARENT);
-
-                    ll.addView(noItems);*/
-                    //startActivity(new Intent(ItemList.this, Event_Add.class));
                 }
             }
 
@@ -104,58 +99,80 @@ public class ItemList extends AppCompatActivity {
                 Toast.makeText(ItemList.this, "Failed to load items.", Toast.LENGTH_SHORT).show();
             }
         };
-        mDatabase.addValueEventListener(postListener);
+        mDatabase.addListenerForSingleValueEvent(postListener);
 
-        // Keep copy of post listener so we can remove it when app stops
+        // --- Keep copy of post listener so we can remove it when app stops ---
         mPostListener = postListener;
 
     }
 
+
+    // --- RETRIEVE ALL INDIVIDUAL ITEM VALUES FROM MAP ---
     private void getAllItems(Map<String,Object> itemList) {
-        //iterate through each user, ignoring their UID
+        // --- iterate through each user, ignoring their UID ---
         for (Map.Entry<String, Object> entry : itemList.entrySet()){
 
-            //Get item map
+            // --- Get item map ---
             Map singleItem = (Map) entry.getValue();
-            //Get individual value
+            // --- Get individual value ---
             String name = (String)singleItem.get("name");
             String price = (String)singleItem.get("price");
 
-            //Create event object, add to list
+            // --- Create event object, add to list ---
             items.add(new Item(name,price));
         }
 
-        //For each event in list, create a row
+        // --- For each event in list, create a row --
         for(Item item: items){
             createItem(item.name, item.price);
         }
     }
 
+
     //--- LIST ITEMS ---
     public void createItem(String name, String price){
-
         LinearLayout container = new LinearLayout(this);
         TextView newItem = new TextView(this);
         TextView iPrice = new TextView(this);
 
-        container.setLayoutParams(new ActionBar.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        // --- Set linear layout attributes ---
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
         container.setOrientation(LinearLayout.HORIZONTAL);
+        lp.setMargins(20, 10, 20, 10);
+        container.setLayoutParams(lp);
+        container.setPadding(60,0,60,0);
+        GradientDrawable gd = new GradientDrawable();
+        gd.setColor(0xFFffffff);
+        container.setBackground(gd);
 
+        // --- Set item name attributes ---
         newItem.setText(name);
+        newItem.setTextColor(Color.BLACK);
+        newItem.setTypeface(textfont);
         newItem.setLayoutParams(new ActionBar.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         newItem.setWidth(500);
-        newItem.setTextSize(20);
+        newItem.setHeight(180);
+        newItem.setTextSize(18);
         newItem.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
         newItem.setBackgroundColor(Color.TRANSPARENT);
 
-        iPrice.setText(price);
+        // --- Format price to 2 decimal points for display
+        DecimalFormat df = new DecimalFormat("#.00");
+        double fPrice = Double.parseDouble(price);
+        price = df.format(fPrice);
+
+        // --- Set item price attributes ---
+        iPrice.setText("RM" + price);
+        iPrice.setTextColor(Color.BLACK);
+        iPrice.setTypeface(textfont);
         iPrice.setLayoutParams(new ActionBar.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        iPrice.setWidth(300);
-        iPrice.setTextSize(12);
-        iPrice.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+        iPrice.setWidth(500);
+        iPrice.setTextSize(18);
+        iPrice.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
         iPrice.setBackgroundColor(Color.TRANSPARENT);
 
         container.addView(newItem);
@@ -167,10 +184,9 @@ public class ItemList extends AppCompatActivity {
     class ButtonHandler implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
             int i = v.getId();
             if (i == R.id.b_addEvent) {
-
+                // --- Create a dialog box for adding a new item ---
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(ItemList.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_item_creation, null);
                 final TextView iName = (TextView) mView.findViewById(R.id.item_name);
@@ -184,8 +200,12 @@ public class ItemList extends AppCompatActivity {
                 addButton.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
-                        toDatabase(iName.getText().toString(), iPrice.getText().toString());
+                        // --- Add new item to database and preview list ---
+                        String newName = iName.getText().toString();
+                        String newPrice = iPrice.getText().toString();
+                        toDatabase(newName, newPrice);
                         dialog.dismiss();
+                        createItem(newName, newPrice);
                     }
                 });
 
@@ -196,6 +216,7 @@ public class ItemList extends AppCompatActivity {
             }
         }
     }
+
 
     //--- Button listener for each Event ---
     /*View.OnClickListener buttonClicked(final Button button)  {
@@ -220,11 +241,13 @@ public class ItemList extends AppCompatActivity {
         };
     }*/
 
-    //--- ADD ITEM DETAILS TO DATABASE
+
+    // --- WRITE NEW ITEM TO DATABASE ---
     private void toDatabase(String name, String price) {
         Item item = new Item(name, price);
         mDatabase.child("items").child(name).setValue(item);
     }
+
 
     @Override
     public void onBackPressed(){
