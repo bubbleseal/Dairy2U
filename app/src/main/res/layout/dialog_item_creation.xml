@@ -21,14 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
-            android:background="@color/form"
+            android:background="@color/grey1"
             android:hint="Product Name"
             android:inputType="text"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:typeface="normal" />
+            android:typeface="normal"
+            android:textColorHint="@color/grey2" />
 
         <!-- Price Form -->
         <EditText
@@ -37,14 +38,28 @@
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="15dp"
-            android:background="@color/form"
+            android:background="@color/grey1"
             android:hint="Price"
             android:inputType="numberDecimal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textColor="@android:color/white"
+            android:textColorHint="@color/grey2"
             android:textSize="18sp"
-            android:typeface="normal" />
+            android:typeface="normal"
+            android:textColor="@android:color/black" />
+
+        <!-- Type Form -->
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:id="@+id/item_type"
+            android:entries="@array/country_arrays"
+            android:prompt="@string/country_prompt"
+            android:background="@color/grey1"
+            android:animateLayoutChanges="false" />
 
 
         <!-- create event button -->
@@ -65,5 +80,7 @@
 
 
     </TableLayout>
+
+
 </ScrollView>
 
