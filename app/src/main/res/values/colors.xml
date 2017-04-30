@@ -6,7 +6,7 @@
     <color name="brown1">#6e4501</color>
     <color name="brown2">#f0bf60</color>
     <color name="form">#4c2f01</color>
-    <color name="white">#f1f3f2</color>
-    <color name="grey1">#b1aca9</color>
+    <color name="white">#ffffff</color>
+    <color name="grey1">#f5f1ef</color>
     <color name="grey2">#737077</color>
 </resources>
