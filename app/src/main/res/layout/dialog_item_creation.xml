@@ -27,7 +27,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:typeface="normal"
             android:textColorHint="@color/grey2" />
 
@@ -36,7 +36,7 @@
             android:id="@+id/item_price"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
             android:background="@color/grey1"
             android:hint="Price"
@@ -44,7 +44,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColorHint="@color/grey2"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:typeface="normal"
             android:textColor="@android:color/black" />
 
@@ -54,12 +54,11 @@
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="15dp"
-            android:textSize="18sp"
             android:id="@+id/item_type"
-            android:entries="@array/country_arrays"
-            android:prompt="@string/country_prompt"
+            android:entries="@array/item_arrays"
+            android:prompt="@string/item_types"
             android:background="@color/grey1"
-            android:animateLayoutChanges="false" />
+            android:animateLayoutChanges="true"/>
 
 
         <!-- create event button -->
@@ -77,10 +76,6 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp" />
-
-
     </TableLayout>
-
-
 </ScrollView>
 
