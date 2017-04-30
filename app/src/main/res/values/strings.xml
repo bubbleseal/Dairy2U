@@ -7,4 +7,18 @@
     <string name="link_pwdforgotten">Forgotten Password?</string>
     <string name="link_register">Not a member?</string>
     <string name="title_activity_product__list">Product_List</string>
+    <string name="title_activity_shop">Shop</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="country_prompt">Choose a country</string>
+
+    <string-array name="country_arrays">
+        <item>Butter</item>
+        <item>Cheese</item>
+        <item>Cream</item>
+        <item>Drinks</item>
+        <item>Milk</item>
+        <item>Yogurt</item>
+    </string-array>
 </resources>
