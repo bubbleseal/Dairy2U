@@ -19,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Shop extends AppCompatActivity {
     private ViewPager mViewPager;
@@ -33,10 +32,9 @@ public class Shop extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private int[] tabIcons = {
-            R.drawable.ic_milk_white,
-            R.drawable.ic_butter_white,
+            R.drawable.ic_milk_white, //Includes milk and drinks
+            R.drawable.ic_butter_white, //Includes butter
             R.drawable.ic_cheese_white,
-            R.drawable.ic_cream_white,
             R.drawable.ic_yogurt_white
     };
     static List<Item> productList = new ArrayList<>();
@@ -55,7 +53,10 @@ public class Shop extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo);
 
         viewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
@@ -92,12 +93,10 @@ public class Shop extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
-        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new Fragment_Drinks());
         adapter.addFrag(new Fragment_Drinks());
         adapter.addFrag(new Fragment_Drinks());
         adapter.addFrag(new Fragment_Drinks());
